@@ -40,7 +40,13 @@
                                 <td>{{ $project->slug }}</td>
                                 <td>{{ $project->content }}</td>
                                 <td>{{ $project->category ? $project->category->title : 'Non disponibile' }}</td>
-                                <td>{{ $project->technology ? $project->technology->name : 'Non disponibile' }}</td>
+                                <td>
+                                    @forelse ($project->technologies as $technology)
+                                        {{ $technology->name }}
+                                    @empty
+                                        {{ 'Non disponibile' }}
+                                    @endforelse
+                                </td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a title="Visualizza" class="btn btn-square btn-sm py-2 btn-primary" href="{{ route('admin.projects.show', $project->slug) }}"><i class="fa-solid fa-eye"></i></a>

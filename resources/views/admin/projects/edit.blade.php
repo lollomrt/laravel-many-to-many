@@ -32,7 +32,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group w-75">
-                        <label for="">Titolo</label>
+                        <label for="">Title</label>
                         <input type="text" name="title" class="form-control" value="{{ old('title') ?? $project->title}}" placeholder="Inserisci il nome del progetto ...">
                         @error('title')
                             <div class="text-danger">
@@ -41,12 +41,23 @@
                         @enderror
                     </div>
                     <div class="d-flex flex-column flex-grow">
-                        <label for="">Categorie</label>
+                        <label for="">Categories</label>
                         <select class="form-select w-100" name="category_id" id="category_id">
                             @foreach($categories as $category)
                             <option value="{{$category->id}}" {{ $category->id == old ('category_id', $project->category_id) ?? 'selected'}}>{{$category->title}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="d-flex flex-column w-100">
+                        <label for="">Technologies</label>
+                        <div class="d-flex flex-column">
+                        @foreach($technologies as $technology)
+                        <div>
+                            <input id="label" type="checkbox" value="{{ $technology->id }}" name="technologies[]" {{in_array($technology->id, old('technologies', [])) ? 'checked' : ''}}>
+                            <label for="label">{{ $technology->name }}</label>
+                        </div>                            
+                        @endforeach
+                        </div>
                     </div>
                     <div class="form-group w-100">
                         <label for="">Descrizione</label>

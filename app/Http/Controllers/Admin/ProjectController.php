@@ -79,7 +79,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('admin.projects.edit', compact('project', 'categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'categories', 'technologies'));
     }
 
     /**
@@ -95,6 +96,10 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($request->title);
         $form_data['slug'] = $slug;
         $project->update($form_data);
+
+        if($request->has('technologies')){
+            $project->technologies()->sync($request->technologies);
+        }
 
 
         return redirect()->route('admin.projects.index')->with('message', $project->title.' è stato modificato con successo!');
