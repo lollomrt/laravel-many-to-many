@@ -36,7 +36,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.projects.create', compact('categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('categories', 'technologies'));
     }
 
     /**
@@ -52,8 +53,12 @@ class ProjectController extends Controller
         $form_data['slug'] = $slug;
         $newProject = new Project();
         $newProject->fill($form_data);
-
+        
         $newProject -> save();
+        
+        if($request->has('technologies')){
+            $newProject->technologies()->attach($request->technologies);
+        }
 
         return redirect()->route('admin.projects.index')->with('message', 'Il progetto è stato creato con successo!');
     }

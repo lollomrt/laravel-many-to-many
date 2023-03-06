@@ -42,7 +42,7 @@
                                 <td>{{ $project->category ? $project->category->title : 'Non disponibile' }}</td>
                                 <td>
                                     @forelse ($project->technologies as $technology)
-                                        {{ $technology->name }}
+                                        <span class="badge bg-primary">{{ $technology->name }}</span>
                                     @empty
                                         {{ 'Non disponibile' }}
                                     @endforelse

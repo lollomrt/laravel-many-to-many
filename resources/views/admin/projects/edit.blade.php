@@ -53,7 +53,7 @@
                         <div class="d-flex flex-column">
                         @foreach($technologies as $technology)
                         <div>
-                            <input id="label" type="checkbox" value="{{ $technology->id }}" name="technologies[]" {{in_array($technology->id, old('technologies', [])) ? 'checked' : ''}}>
+                            <input id="{{ $technology->name }}" type="checkbox" value="{{ $technology->id }}" name="technologies[]" {{in_array($technology->id, old('technologies', [])) ? 'checked' : ''}}>
                             <label for="label">{{ $technology->name }}</label>
                         </div>                            
                         @endforeach

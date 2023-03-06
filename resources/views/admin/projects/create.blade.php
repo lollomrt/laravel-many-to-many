@@ -47,6 +47,17 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="d-flex flex-column w-100">
+                        <label for="">Technologies</label>
+                        <div class="d-flex flex-column">
+                        @foreach($technologies as $technology)
+                        <div>
+                            <input id="{{ $technology->name }}" type="checkbox" value="{{ $technology->id }}" name="technologies[]">
+                            <label for="{{ $technology->name }}">{{ $technology->name }}</label>
+                        </div>                            
+                        @endforeach
+                        </div>
+                    </div>
                     <div class="form-group w-100">
                         <label for="">Descrizione</label>
                         <textarea name="content" id="" cols="30" rows="4" class="form-control" placeholder="Inserisci descrizione ..."></textarea>
